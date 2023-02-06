@@ -227,32 +227,5 @@ I64 SysI64Get()
 
 U0 BlkDevsInitAll()
 {
-	CBlkDev	*bd;
-	I64		 i;
-
-	blkdev.blkdevs	= CAlloc(sizeof(CBlkDev) * BLKDEVS_NUM);
-	blkdev.drvs		= CAlloc(sizeof(CDrive)  * DRIVES_NUM);
-	for (i = 0; i < DRIVES_NUM; i++)
-		blkdev.let_to_drive[i] = &blkdev.drvs[i];
-
-	"\nAHCIInit;\n";
-	AHCIInit;
-
-	if (!blkdev.ahci_hba)
-	{
-		"\nZealOS requires AHCI.\n\n"
-		"If in IDE compatibility mode, switch to SATA mode.\n"
-		"If running in a VM, ensure disks are organized under a SATA controller.\n\n"
-		"Rebooting in 10 seconds...\n";
-		Sleep(10*1000);
-		Reboot;
-	}
-
-	#exe {
-		if (kernel_config->opts[CONFIG_MOUNT_AHCI_AUTO])
-			StreamPrint("MountAHCIAuto;");
-		StreamPrint("#exe {Option(OPTf_WARN_PAREN, OFF);}");
-		StreamDoc(kernel_config->add_dev);
-		StreamPrint("#exe {Option(OPTf_WARN_PAREN, ON);}");
-	};
+    return;
 }
